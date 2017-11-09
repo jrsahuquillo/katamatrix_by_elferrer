@@ -1,0 +1,34 @@
+version: '3'
+services:
+  matrix:
+    container_name: matrix
+    build: .
+    volumes:
+     - .:/home/matrix
+     - bundle:/usr/local/bundle
+
+  neo:
+    container_name: neo
+    image: neo:latest
+    volumes:
+     - .:/home/matrix
+     - bundle:/usr/local/bundle
+    command: bash -c "rspec"
+
+  trinity:
+    container_name: trinity
+    image: trinity:latest
+    volumes:
+     - .:/home/matrix
+     - bundle:/usr/local/bundle
+
+  morpheus:
+    container_name: morpheus
+    image: morpheus:latest
+    volumes:
+     - .:/home/matrix
+     - bundle:/usr/local/bundle
+
+volumes:
+  bundle:
+    driver: local
